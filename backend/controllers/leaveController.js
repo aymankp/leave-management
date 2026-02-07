@@ -71,16 +71,33 @@ const updateLeaveStatus = async (req, res) => {
             leave,
         });
     } catch (error) {
-        console.error(error);
+        console.error("UPDATE LEAVE ERROR:", error);
         res.status(500).json({
-            message: "Server error",
+            message: error.message,
         });
     }
+
 };
+const getPendingLeaves = async (req, res) => {
+  try {
+    const leaves = await Leave.find({ status: "pending" })
+      .populate("employee", "name email")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(leaves);
+  } catch (error) {
+    console.error("PENDING LEAVES ERROR:", error);
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
     applyLeave,
     getMyLeaves,
     updateLeaveStatus,
+    getPendingLeaves,
 };
 
 
