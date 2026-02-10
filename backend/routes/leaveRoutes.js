@@ -15,6 +15,8 @@ router.post("/apply", protect, applyLeave);
 router.get("/my", protect, getMyLeaves);
 // MANAGER
 router.put("/:id/status", protect, isManager, updateLeaveStatus);
+
+
 // MANAGER: view pending leaves
 router.get("/pending", protect, isManager, getPendingLeaves);
 module.exports = router;
