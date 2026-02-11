@@ -1,0 +1,56 @@
+body {
+  background-color: lightgoldenrodyellow;
+}
+
+.admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.admin-table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: #f4f4f4;
+}
+
+.admin-table select {
+    padding: 4px;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-approved {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+.logout-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.logout-btn:hover {
+  opacity: 0.8;
+}

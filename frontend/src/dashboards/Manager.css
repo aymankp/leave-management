@@ -1,0 +1,43 @@
+.manager-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.manager-table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+}
+
+.manager-table th,
+.manager-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.manager-table th {
+  background-color: #f4f4f4;
+}
+
+.approve-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

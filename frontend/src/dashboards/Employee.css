@@ -1,0 +1,57 @@
+.employee-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.employee-container h2 {
+  margin-bottom: 10px;
+}
+
+.employee-container h3 {
+  margin-top: 30px;
+}
+
+.leave-form {
+  margin-bottom: 20px;
+}
+
+.leave-form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 250px;
+}
+
+.leave-form button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.leave-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 700px;
+}
+
+.leave-table th,
+.leave-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.leave-table th {
+  background-color: #f4f4f4;
+}
+
+.status-pending {
+  color: orange;
+}
+
+.status-approved {
+  color: green;
+}
+
+.status-rejected {
+  color: red;
+}
