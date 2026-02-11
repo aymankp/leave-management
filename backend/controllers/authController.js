@@ -7,6 +7,12 @@ const Leave = require("../models/Leave");
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+   
+    if (user.role === "employee") {
+      const manager = await User.findOne({ role: "manager" });
+      console.log("FOUND MANAGER:", manager);
+      managerId = manager?._id;
+    }
 
     // 1. Check all fields
     if (!name || !email || !password) {
@@ -51,58 +57,55 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+
 // LOGIN API
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    
-    // 1. Check fields
+
     if (!email || !password) {
-      return res.status(400).json({
-        message: "Email and password are required",
-      });
+      return res.status(400).json({ message: "Email and password required" });
     }
-    
-    // 2. Check user exists
+
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({
-        message: "Invalid credentials",
-      });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
-    
-    // 3. Compare password
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({
-        message: "Invalid credentials",
-      });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
-    
-    // 4. Generate JWT token
+
+    // 🔥 SIMPLE LOGIC:
+    let managerId = null;
+
+    if (user.role === "employee") {
+      const manager = await User.findOne({ role: "manager" });
+      managerId = manager?._id;
+    }
+
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-    
-    // 5. Response
-    res.status(200).json({
-      message: "Login successful",
+
+    res.json({
       token,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
+        manager: managerId, // ✅ always available
       },
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Server error",
-    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 module.exports = { registerUser, loginUser };

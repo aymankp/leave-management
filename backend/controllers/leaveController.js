@@ -1,8 +1,5 @@
 const Leave = require("../models/Leave");
-
-
 const applyLeave = async (req, res) => {
-
     try {
         const { fromDate, toDate, reason } = req.body;
 
@@ -11,14 +8,12 @@ const applyLeave = async (req, res) => {
                 message: "All fields are required",
             });
         }
-
         const leave = await Leave.create({
             employee: req.user._id, // 🔥 from JWT middleware
             fromDate,
             toDate,
             reason,
         });
-
         res.status(201).json({
             message: "Leave applied successfully",
             leave,
@@ -79,18 +74,18 @@ const updateLeaveStatus = async (req, res) => {
 
 };
 const getPendingLeaves = async (req, res) => {
-  try {
-    const leaves = await Leave.find({ status: "pending" })
-      .populate("employee", "name email")
-      .sort({ createdAt: -1 });
+    try {
+        const leaves = await Leave.find({ status: "pending" })
+            .populate("employee", "name email")
+            .sort({ createdAt: -1 });
 
-    res.status(200).json(leaves);
-  } catch (error) {
-    console.error("PENDING LEAVES ERROR:", error);
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+        res.status(200).json(leaves);
+    } catch (error) {
+        console.error("PENDING LEAVES ERROR:", error);
+        res.status(500).json({
+            message: error.message,
+        });
+    }
 };
 
 module.exports = {

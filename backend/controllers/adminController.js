@@ -93,6 +93,19 @@ const addEmployee = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+const assignManager = async (req, res) => {
+  const { employeeId, managerId } = req.body;
+
+  const employee = await User.findById(employeeId);
+  if (!employee) {
+    return res.status(404).json({ message: "Employee not found" });
+  }
+
+  employee.manager = managerId;
+  await employee.save();
+
+  res.json({ message: "Manager assigned successfully" });
+};
 
 
 module.exports = {
@@ -100,4 +113,5 @@ module.exports = {
   updateUserRole,
   getAllLeaves,
   addEmployee,
+  assignManager,
 };

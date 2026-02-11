@@ -25,6 +25,15 @@ const userSchema = new mongoose.Schema(
       enum: ["employee", "manager", "admin"],
       default: "employee",
     },
+    lastSeen: {
+      type: Date,
+      default: Date.now,
+    },
+    manager: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
   },
   {
     timestamps: true,
