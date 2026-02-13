@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { protect } = require("../middleware/authMiddleware");
 const { isManager } = require("../middleware/roleMiddleware");
-const { getPendingLeaves } = require("../controllers/leaveController");
+const { getPendingLeaves , getLeaveRecommendation} = require("../controllers/leaveController");
 
 const {
   applyLeave,
@@ -20,3 +20,7 @@ router.put("/:id/status", protect, isManager, updateLeaveStatus);
 // MANAGER: view pending leaves
 router.get("/pending", protect, isManager, getPendingLeaves);
 module.exports = router;
+
+
+//recommendation for ai
+router.get("/:id/recommendation", protect, isManager, getLeaveRecommendation);

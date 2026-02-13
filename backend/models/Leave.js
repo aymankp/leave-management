@@ -23,11 +23,17 @@ const leaveSchema = new mongoose.Schema(
       required: true,
     },
 
+    leaveType: {
+      type: String,
+      enum: ["casual", "sick"],
+      required: true,
+    },
+
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
-    },
+    }
   },
   { timestamps: true }
 );

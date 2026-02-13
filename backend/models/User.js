@@ -33,6 +33,15 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    team: {
+      type: String,
+      required: true
+    },
+
+    leaveBalance: {
+      casual: { type: Number, default: 10 },
+      sick: { type: Number, default: 5 }
+    },
 
   },
   {

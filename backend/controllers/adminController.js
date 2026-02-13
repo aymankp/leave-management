@@ -32,13 +32,16 @@ const updateUserRole = async (req, res) => {
     }
 
     user.role = role;
-    await user.save();
+    await user.save({ validateBeforeSave: false });
+
+
 
     res.status(200).json({
       message: "Role updated successfully",
       user,
     });
   } catch (error) {
+    console.error("UPDATE ROLE ERROR:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -59,18 +62,17 @@ const getAllLeaves = async (req, res) => {
 
 const addEmployee = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, team } = req.body;
 
-    if (!name || !email) {
+    if (!name || !email || !team) {
       return res.status(400).json({ message: "All fields required" });
     }
-
     const exists = await User.findOne({ email });
     if (exists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const tempPassword = "Welcome@123"; // later random bana sakte ho
+    const tempPassword = "Test@123"; // later random bana sakte ho
     const hashedPassword = await bcrypt.hash(tempPassword, 10);
 
     const user = await User.create({
@@ -78,6 +80,7 @@ const addEmployee = async (req, res) => {
       email,
       password: hashedPassword,
       role: "employee",
+      team,
     });
 
     res.status(201).json({
@@ -94,17 +97,27 @@ const addEmployee = async (req, res) => {
   }
 };
 const assignManager = async (req, res) => {
-  const { employeeId, managerId } = req.body;
+  try {
+    const { employeeId, managerId } = req.body;
 
-  const employee = await User.findById(employeeId);
-  if (!employee) {
-    return res.status(404).json({ message: "Employee not found" });
+    if (!employeeId || !managerId) {
+      return res.status(400).json({ message: "Both IDs required" });
+    }
+
+    const employee = await User.findById(employeeId);
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    employee.manager = managerId;
+    await employee.save();
+
+    res.status(200).json({ message: "Manager assigned successfully" });
+
+  } catch (error) {
+    console.error("ASSIGN MANAGER ERROR:", error);
+    res.status(500).json({ message: error.message });
   }
-
-  employee.manager = managerId;
-  await employee.save();
-
-  res.json({ message: "Manager assigned successfully" });
 };
 
 
