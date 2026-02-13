@@ -1,56 +1,82 @@
-body {
-  background-color: lightgoldenrodyellow;
+.admin-wrapper {
+  padding: 40px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
-.admin-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.admin-table {
-    width: 100%;
-    max-width: 900px;
-    border-collapse: collapse;
-}
-
-.admin-table th,
-.admin-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-}
-
-.admin-table th {
-    background-color: #f4f4f4;
-}
-
-.admin-table select {
-    padding: 4px;
-}
-
-.status-pending {
-    color: orange;
-    font-weight: bold;
-}
-
-.status-approved {
-    color: green;
-    font-weight: bold;
-}
-
-.status-rejected {
-    color: red;
-    font-weight: bold;
-}
 .logout-btn {
-  background-color: black;
+  padding: 8px 16px;
+  background: #ff4d4f;
   color: white;
   border: none;
-  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-bottom: 15px;
 }
 
-.logout-btn:hover {
-  opacity: 0.8;
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.add-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.add-form input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.add-form button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  background: #f1f1f1;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.status.approved {
+  color: green;
+  font-weight: bold;
+}
+
+.status.pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.status.rejected {
+  color: red;
+  font-weight: bold;
 }
